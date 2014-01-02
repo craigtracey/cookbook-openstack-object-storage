@@ -19,15 +19,15 @@
 include_recipe "openstack-object-storage::common"
 
 # make sure we die if there are multiple swift-setups
-if Chef::Config[:solo]
-  Chef::Application.fatal! "This recipe uses search. Chef Solo does not support search."
-else
-  setup_role = node["swift"]["setup_chef_role"]
-  setup_role_count = search(:node, "chef_environment:#{node.chef_environment} AND roles:#{setup_role}").length
-  if setup_role_count > 1
-    Chef::Application.fatal! "You can only have one node with the swift-setup role"
-  end
-end
+#if Chef::Config[:solo]
+#  Chef::Application.fatal! "This recipe uses search. Chef Solo does not support search."
+#else
+#  setup_role = node["swift"]["setup_chef_role"]
+#  setup_role_count = search(:node, "chef_environment:#{node.chef_environment} AND roles:#{setup_role}").length
+#  if setup_role_count > 1
+#    Chef::Application.fatal! "You can only have one node with the swift-setup role"
+#  end
+#end
 
 unless node["swift"]["service_pass"]
   Chef::Log.info("Running swift setup - setting swift passwords")
